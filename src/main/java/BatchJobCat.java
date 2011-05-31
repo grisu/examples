@@ -20,7 +20,7 @@ public class BatchJobCat {
 	public static void main(final String[] args) throws Exception {
 
 		final ServiceInterface si = LoginManager
-				.loginCommandline("BeSTGRID-DEV");
+		.loginCommandline("BeSTGRID-DEV");
 
 		final GrisuRegistry registry = GrisuRegistryManager.getDefault(si);
 
@@ -48,7 +48,7 @@ public class BatchJobCat {
 			batchJob.addJob(jo);
 		}
 
-		batchJob.addInputFile("/home/markus/tmp/singleJobFile.txt");
+		batchJob.addInputFile("/home/markus/tmp/commonJobFile.txt");
 
 		batchJob.setDefaultNoCpus(1);
 		batchJob.setDefaultWalltimeInSeconds(60);
