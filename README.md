@@ -6,5 +6,5 @@ This repository contains commented example code that show how to do usual tasks 
 Useful resources in addition to these examples:
 
 - [the Grisu wiki](https://github.com/grisu/grisu/wiki)
-- [Javadoc](https://code.arcs.org.au/hudson/me/my-views/view/My%20stuff/job/Grisu-SNAPSHOT/javadoc)
+- [Javadoc](http://grisu.github.com/grisu/javadoc/)
 
