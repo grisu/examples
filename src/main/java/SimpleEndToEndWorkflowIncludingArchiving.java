@@ -1,8 +1,6 @@
-
 import grisu.control.ServiceInterface;
 import grisu.control.exceptions.JobPropertiesException;
 import grisu.control.exceptions.JobSubmissionException;
-import grisu.control.exceptions.RemoteFileSystemException;
 import grisu.frontend.control.login.LoginException;
 import grisu.frontend.control.login.LoginManager;
 import grisu.frontend.model.job.JobObject;
@@ -12,42 +10,64 @@ import grisu.model.GrisuRegistry;
 import grisu.model.GrisuRegistryManager;
 import grisu.model.dto.GridFile;
 
-public class SimpleEndToEndWorkflow {
+public class SimpleEndToEndWorkflowIncludingArchiving {
 
 	/**
 	 * Commented example code on how to submit a job and then access and work
 	 * with the results.
 	 */
-	public static void main(String[] args) throws RemoteFileSystemException {
+	public static void main(String[] args) throws Exception {
 
 		System.out.println("Logging in...");
 		ServiceInterface si = null;
 		try {
 			// login
 			// in this case we login via the commandline
-			// si = LoginManager.loginCommandline("BeSTGRID");
-			si = LoginManager.loginCommandline("LOCAL");
+			si = LoginManager.loginCommandline("BeSTGRID-DEV");
+			// si = LoginManager.loginCommandline("LOCAL");
 		} catch (final LoginException e) {
 			System.err.println("Could not login: " + e.getLocalizedMessage());
 			System.exit(1);
 		}
 
-		// create a registry. the registry is used to get objects that can
-		// provide all kinds of grid and user information as well
-		// as a filemanager which wraps up the most common file transfer
-		// use cases
-		final GrisuRegistry registry = GrisuRegistryManager.getDefault(si);
+		SimpleEndToEndWorkflowIncludingArchiving wf = new SimpleEndToEndWorkflowIncludingArchiving(
+				si);
 
-		// getting a filemanager object, which encapsulates file related actions
-		// we'll need that later once the job is finished
-		FileManager fm = registry.getFileManager();
+		int noJobs = 10;
+
+		for (int i = 0; i < noJobs; i++) {
+			wf.submitJob();
+		}
+
+		// it's pretty important to shutdown the jvm properly. There might be
+		// some executors running in the background
+		// and they need to know when to shutdown.
+		// Otherwise, your application might not exit.
+		System.exit(0);
+
+	}
+
+	private final ServiceInterface si;
+	private final GrisuRegistry registry;
+
+	private final FileManager fm;
+
+	public SimpleEndToEndWorkflowIncludingArchiving(ServiceInterface si) {
+		this.si = si;
+		this.registry = GrisuRegistryManager.getDefault(si);
+		this.fm = registry.getFileManager();
+	}
+
+	public void submitJob() throws Exception {
 
 		System.out.println("Creating job...");
 		// this creates a new, empty JobObject
 		final JobObject job = new JobObject(si);
 		// if we know it, we should set the name of the Application so Grisu
 		// does not have to calculate it for us
-		job.setApplication("UnixCommands");
+		// in this case, we let Grisu figure out the application
+		// job.setApplication("UnixCommands");
+
 		// every job has to have a unique jobname, JobObject (more exactly, it's
 		// parent class) provide a few convenience methods to ensure that, like
 		// the one below
@@ -56,19 +76,15 @@ public class SimpleEndToEndWorkflow {
 		// we can set a submission location if we want to enforce where the job
 		// should run. This can be omitted and Grisu will automatically choose a
 		// suitable submission location for you
-		job.setSubmissionLocation("route@er171.ceres.auckland.ac.nz:ng2.auckland.ac.nz");
+		// in this case, we let Grisu decide, but if you wanted to set it, you'd
+		// do it like:
 
-		// for this job, we upload an input folder into a (differently named)
-		// folder (called "testfolder"). If we don't need a different name/path,
-		// we can use the one-parameter version of this method.
-		job.addInputFileUrl(
-				"/home/markus/grid-src/grisu-virtscreen/src/main/java",
-		"testfolder");
+		// job.setSubmissionLocation("route@er171.ceres.auckland.ac.nz:ng2.auckland.ac.nz");
 
 		// for reference, we remember the auto-determined name of the job
 		System.out.println("Set jobname to be: " + job.getJobname());
 		// most importantly, we need to specify the command we want to run
-		job.setCommandline("find .");
+		job.setCommandline("echo hello world");
 
 		// also, we need to set a walltime to help the scheduler on the cluster
 		// do it's task (default is 600 which is too short for a normal job)
@@ -82,7 +98,7 @@ public class SimpleEndToEndWorkflow {
 			// filesystems that are usable for the job and so on).
 			// for that to work we also need to specify the VO we want to use to
 			// submit the job
-			job.createJob("/ARCS/BeSTGRID");
+			job.createJob("/nz/UoA");
 		} catch (final JobPropertiesException e) {
 			System.err.println("Could not create job: "
 					+ e.getLocalizedMessage());
@@ -137,12 +153,19 @@ public class SimpleEndToEndWorkflow {
 		System.out.println("Stdout: " + job.getStdOutContent());
 		System.out.println("Stderr: " + job.getStdErrContent());
 
-
-		// it's pretty important to shutdown the jvm properly. There might be
-		// some executors running in the background
-		// and they need to know when to shutdown.
-		// Otherwise, your application might not exit.
-		System.exit(0);
+		try {
+			// now we archive the job to the default archive location
+			// (automatically determined if not manually set -- usually this
+			// would go to the BeSTGRID datafabric
+			// also, we are waiting until the archiving is finished...
+			System.out.println("Archiving job...");
+			String archiveLocation = job.archive(null, true);
+			System.out.println("Archived job to: " + archiveLocation);
+		} catch (JobPropertiesException e) {
+			System.err.println("Could not archive job: "
+					+ e.getLocalizedMessage());
+			System.exit(1);
+		}
 
 	}
 }

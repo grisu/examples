@@ -1,3 +1,4 @@
+package devHelpers;
 import grisu.control.ServiceInterface;
 import grisu.model.FileManager;
 import grisu.model.GrisuRegistryManager;
