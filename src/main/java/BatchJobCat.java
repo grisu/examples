@@ -53,6 +53,8 @@ public class BatchJobCat {
 		batchJob.setDefaultNoCpus(1);
 		batchJob.setDefaultWalltimeInSeconds(60);
 
+		batchJob.setLocationsToExclude(new String[] { "gt5test:ng1.canterbury.ac.nz" });
+
 		try {
 			batchJob.prepareAndCreateJobs(true);
 		} catch (final JobsException e) {
