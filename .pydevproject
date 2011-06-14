@@ -6,5 +6,9 @@
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">jython 2.7</pydev_property>
 <pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
 <path>/Grisu-scripted-submission/src</path>
+<path>/Grisu-scripted-submission/src</path>
+<path>/Grisu-scripted-submission/BaconCount</path>
+<path>/Grisu-scripted-submission/HelloWorld</path>
+<path>/Grisu-scripted-submission/src</path>
 </pydev_pathproperty>
 </pydev_project>
