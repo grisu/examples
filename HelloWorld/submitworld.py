@@ -5,6 +5,8 @@ Created on 14/06/2011
 '''
 
 import sys
+import random
+import os
 
 # Launch this script with: java -jar ../lib/grisu-jython.jar submitworld.py
 # otherwise, you will need to append the grisu-jython.jar to the path
@@ -29,3 +31,34 @@ backend = "BeSTGRID"
 print "INFO: Creating service inteface to " + backend
 service_interface = LoginManager.loginCommandline(backend)
 print "INFO: Service interface to " + backend + " Created."
+
+# Setting the number of jobs to be submitted
+job_count=5
+
+# Since there may be many jobs submitted in the workshop, lets make them a bit unique to avoid issues.
+base_job_name = str(random.randint(10000,99999))+'-hello-'
+print "INFO: Base job name is "+base_job_name
+
+# Create an output directory
+output_dir=base_job_name+'output'
+try:
+    os.mkdir(output_dir)
+    print "INFO: Output directory is "+output_dir
+except:
+    print "HALT: Could not create output directory "+output_dir
+    sys.exit(1)
+
+# Createing a list of jobs
+jobs=[]
+print "INFO: Creating "+str(job_count)+" helloworld jobs"
+for i in range(1,job_count+1):
+    print "INFO: Creating job "+str(i)+" of "+str(job_count)
+    job=JobObject(service_interface)
+    job.setJobname(base_job_name+str(i))
+    job.addInputFileUrl("helloworld.py")
+    job.setCommandline("python helloworld.py")
+    print"INFO: job "+job.getJobname()+" created"
+    jobs.append(job)
+    
+print "EXIT: submitworld.py complete."
+
