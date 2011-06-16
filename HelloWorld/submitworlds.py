@@ -25,7 +25,7 @@ from grisu.control import ResubmitPolicy, ResubmitPolicy, DefaultResubmitPolicy
 from grisu.jcommons.utils import HttpProxyManager
 # The arguments are: address, port, username and password.
 #HttpProxyManager.setHttpProxy("proxy.example.com", 8080, "", "")
-HttpProxyManager.setHttpProxy("202.27.240.31", 8080, "", "")
+#HttpProxyManager.setHttpProxy("202.27.240.31", 8080, "", "")
 
 # Set the backend to which jobs will be submitted
 backend = "BeSTGRID"
@@ -61,6 +61,8 @@ for i in range(1,job_count+1):
     #The next lines create the actual jobs
     job=JobObject(service_interface)                # Create a job
     job.setJobname(base_job_name+str(i))            # Give it a (hopefully) unique name
+    # job.setSubmissionLocation("all.q:ng2.scenzgrid.org#SGE")
+    job.setSubmissionLocation("route@er171.ceres.auckland.ac.nz:ng2.auckland.ac.nz")
     job.addInputFileUrl(os.path.join(current_dir,"helloworld.py"))  # Add a file
     job.setCommandline("python helloworld.py")      # Set the command to be run
     print"INFO: job "+job.getJobname()+" defined"
@@ -100,7 +102,7 @@ for job in jobs:
         error.printStackTrace()
         sys.exit(1)
 
-    time_elapsed = time.time() - time.start
+    time_elapsed = time.time() - time_start
     print "INFO: Job submission for "+job.getJobname()+" took "+str(time_elapsed)+" seconds"
 
 # Create an output directory
@@ -113,4 +115,4 @@ except:
     sys.exit(1)
         
 print "EXIT: submitworld.py complete."
-
+sys.exit()

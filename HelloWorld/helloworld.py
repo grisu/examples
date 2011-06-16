@@ -7,17 +7,18 @@ A HelloWorld example for the Scripted job submission workshop, eResearch Symposi
 @author: Aaron hicks, hicksa@landcarersearch.co.nz
 '''
 
-import subprocess
-import sys.platform
+import subprocess, platform, sys
+
 
 hostname = subprocess.Popen('hostname', stdout=subprocess.PIPE).stdout.read()
 
-if sys.platform == 'linux2':
+if platform.system() == 'Linux':
     # NOTE: This is a standard Linux command, running it elsewhere will just crash
     whoami = subprocess.Popen('whoami', stdout=subprocess.PIPE).stdout.read()
 else:
     # For not-Linux, do this instead:
-    whoami = sys.platform
+    whoami = platform.system
 
  
 print 'Hello World from ' + whoami + ' on ' + hostname
+sys.exit()
