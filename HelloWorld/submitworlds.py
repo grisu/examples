@@ -97,9 +97,9 @@ for job in jobs:
 
 print "INFO: Wait for jobs to finish"
 for job in jobs:
-    print "INFO: Waiting for "+job.getJobname()+".",
+    sys.stdout.write("INFO: Waiting for "+job.getJobname()+".")
     while not job.isFinished():
-        print ".",
+        sys.stdout.write(".")
         time.sleep(3)
     print ".Status: "+job.getStatusString(False)
     
@@ -115,10 +115,18 @@ except:
 # Retrieve job output
 print "INFO: Downloading output to "+output_dir
 for job in jobs:
-    if job.isSuccessful():
+    if job.isSuccessful(True):
         print "INFO: Downloading output for "+job.getJobname()
+        stdout_file=open(os.path.join(current_dir,output_dir,job.getJobname()+"-stdout.txt"),'w')
+        stdout_file.write(job.getStdOutContent())
+        stdout_file.close()
     else:
         print "INFO: "+job.getJobname()+" was not successful, skipping download"
+
+print "INFO: Kill all jobs to clean up"
+for job in jobs:        
+    print "INFO: Killing "+job.getJobname()
+    job.kill(True)
         
 print "EXIT: submitworld.py complete."
 sys.exit()

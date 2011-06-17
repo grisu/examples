@@ -14,10 +14,10 @@ hostname = subprocess.Popen('hostname', stdout=subprocess.PIPE).stdout.read()
 
 if platform.system() == 'Linux':
     # NOTE: This is a standard Linux command, running it elsewhere will just crash
-    whoami = subprocess.Popen('whoami', stdout=subprocess.PIPE).stdout.read()
+    whoami = subprocess.Popen('whoami', stdout=subprocess.PIPE).stdout.read().rstrip()
 else:
     # For not-Linux, do this instead:
-    whoami = platform.system
+    whoami = platform.system()
 
  
 print 'Hello World from ' + whoami + ' on ' + hostname
