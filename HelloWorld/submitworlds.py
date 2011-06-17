@@ -58,13 +58,14 @@ jobs=[]
 print "INFO: Defining "+str(job_count)+" helloworld jobs"
 for i in range(1,job_count+1):
     print "INFO: Defining job "+str(i)+" of "+str(job_count)
-    #The next lines create the actual jobs
-    job=JobObject(service_interface)                # Create a job
-    job.setJobname(base_job_name+str(i))            # Give it a (hopefully) unique name
-    # job.setSubmissionLocation("all.q:ng2.scenzgrid.org#SGE")
-    job.setSubmissionLocation("route@er171.ceres.auckland.ac.nz:ng2.auckland.ac.nz")
+    #The next lines define the actual job's parameters
+    job=JobObject(service_interface)                                # Create a job
+    job.setJobname(base_job_name+str(i))                            # Give it a (hopefully) unique name
+    job.setApplication("python")                                    # Set the application being run
+    job.setApplicationVersion("2.4")                                # Set the application version, note this is an exact match
+    # job.setSubmissionLocation("all.q:ng2.scenzgrid.org#SGE")        # Set the location the job will be submitted to 
     job.addInputFileUrl(os.path.join(current_dir,"helloworld.py"))  # Add a file
-    job.setCommandline("python helloworld.py")      # Set the command to be run
+    job.setCommandline("python helloworld.py")                      # Set the command to be run
     print"INFO: job "+job.getJobname()+" defined"
     jobs.append(job)
 
@@ -75,36 +76,33 @@ for job in jobs:
     try:
         print "INFO: Creating job "+job.getJobname()+" on "+backend+" backend, with "+group+" group"
         job.createJob(group)
-    except (JobsException), error:
-        print "HALT: Exception submitting job!"
-        print "Job: "+job.getJobname()+", Error: "+error.getFailures().get(job).getLocalizedMessage()
-        sys.exit(1)
-    except (BackendException), error:
-        print "HALT: Exception from grisu backend!"
-        print error.getLocalizedMessage()
-        print"========================"
-        time.sleep(3)
-        error.printStackTrace()
-        sys.exit(1)
-        
-    try:
         print "INFO: Submitting job "+job.getJobname()
         job.submitJob()
     except (JobsException), error:
         print "HALT: Exception submitting job!"
         print "Job: "+job.getJobname()+", Error: "+error.getFailures().get(job).getLocalizedMessage()
-        sys.exit(1)
-    except (BackendException), error:
-        print "HALT: Exception from grisu backend!"
-        print error.getLocalizedMessage()
         print"========================"
         time.sleep(3)
         error.printStackTrace()
         sys.exit(1)
-
+    except (BackendException), error:
+        print "HALT: Exception from grisu backend!"
+        print "Job: "+job.getJobname()+", Error: "+error.getFailures().get(job).getLocalizedMessage()
+        print"========================"
+        time.sleep(3)
+        error.printStackTrace()
+        sys.exit(1)        
     time_elapsed = time.time() - time_start
     print "INFO: Job submission for "+job.getJobname()+" took "+str(time_elapsed)+" seconds"
 
+print "INFO: Wait for jobs to finish"
+for job in jobs:
+    print "INFO: Waiting for "+job.getJobname()+".",
+    while not job.isFinished():
+        print ".",
+        time.sleep(3)
+    print ".Status: "+job.getStatusString(False)
+    
 # Create an output directory
 output_dir=base_job_name+'output'
 try:
@@ -113,6 +111,14 @@ try:
 except:
     print "HALT: Could not create output directory "+output_dir
     sys.exit(1)
+
+# Retrieve job output
+print "INFO: Downloading output to "+output_dir
+for job in jobs:
+    if job.isSuccessful():
+        print "INFO: Downloading output for "+job.getJobname()
+    else:
+        print "INFO: "+job.getJobname()+" was not successful, skipping download"
         
 print "EXIT: submitworld.py complete."
 sys.exit()
