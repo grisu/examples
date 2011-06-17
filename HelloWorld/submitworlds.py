@@ -1,7 +1,9 @@
 '''
 Created on 14/06/2011
 
-@author: hicksa
+A HelloWorld example for the Scripted job submission workshop, eResearch Symposium 2011
+
+@author: Aaron hicks, hicksa@landcarersearch.co.nz
 '''
 
 import sys
@@ -16,16 +18,12 @@ import time
 # Documentation on these objects can be found here: http://grisu.github.com/grisu/javadoc/
 from grisu.jcommons.constants import Constants
 from grisu.frontend.control.login import LoginManager
-from grisu.frontend.model.job import JobObject, JobsException, BackendException, FileUploadException
-from grisu.model import FileManager
-from grisu.settings import ClientPropertiesManager
-from grisu.control import ResubmitPolicy, ResubmitPolicy, DefaultResubmitPolicy
+from grisu.frontend.model.job import JobObject, JobsException, BackendException
 
 # If your netwok has a HTTP proxy you can configure Grisu-Jython to use it here
-from grisu.jcommons.utils import HttpProxyManager
+# from grisu.jcommons.utils import HttpProxyManager
 # The arguments are: address, port, username and password.
-#HttpProxyManager.setHttpProxy("proxy.example.com", 8080, "", "")
-#HttpProxyManager.setHttpProxy("202.27.240.31", 8080, "", "")
+# HttpProxyManager.setHttpProxy("proxy.example.com", 8080, "", "")
 
 # Set the backend to which jobs will be submitted
 backend = "BeSTGRID"
