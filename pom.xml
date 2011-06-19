@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<properties>
+		<grisu.dependency.version>0.3.5-SNAPSHOT</grisu.dependency.version>
+	</properties>
+
+	<artifactId>client-examples</artifactId>
+	<groupId>grisu.frontend</groupId>
+	<version>0.3.5-SNAPSHOT</version>
+	<dependencies>
+		<dependency>
+			<groupId>grisu.frontend</groupId>
+			<artifactId>grisu-client-swing</artifactId>
+			<version>${grisu.dependency.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>grisu.backend</groupId>-->
+<!--			<artifactId>grisu-core</artifactId>-->
+<!--			<version>${grisu.dependency.version}</version>-->
+<!--			<scope>provided</scope>-->
+<!--		</dependency>-->
+
+		<dependency>
+			<groupId>com.jgoodies</groupId>
+			<artifactId>forms</artifactId>
+			<version>1.2.1</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.jidesoft</groupId>
+			<artifactId>jide-oss</artifactId>
+			<version>2.9.1</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.swinglabs</groupId>
+			<artifactId>swingx</artifactId>
+			<version>1.6</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>furbelow</groupId>
+			<artifactId>furbelow</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+
+	<name>Grisu client examples</name>
+	<description>Example code to demonstrate how to use the Grisu client library.</description>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<modules>
+	</modules>
+</project>
