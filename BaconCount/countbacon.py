@@ -22,15 +22,15 @@ if (len(sys.argv[1:]) != 2):
 
 # Process arguments and test they're valid
 dictionary_path, input_path = sys.argv[1:]
-print "INFO: Dictionary file path: "+dictionary_path
-print "INFO: Input file path:      "+input_path
+print "INFO: Dictionary file path: " + dictionary_path
+print "INFO: Input file path:      " + input_path
 
 if not os.path.isfile(dictionary_path):
-    print "HALT: Dictionary file "+dictionary_path+" is not a file"
+    print "HALT: Dictionary file " + dictionary_path + " is not a file"
     sys.exit(1)
 
 if not os.path.isfile(input_path):
-    print "HALT: Input file "+input_path+" is not a file"
+    print "HALT: Input file " + input_path + " is not a file"
     sys.exit(1)
 
 print "INFO: Processing dictionary"
@@ -42,9 +42,9 @@ for line in dictionary_FILE:
 print "INFO: dictionary loaded, " + str(len(dictionary)) + " items found."    
 
 print "INFO: Initialising counter"
-counter={}
+counter = {}
 for phrase in dictionary:
-    counter[phrase]=0
+    counter[phrase] = 0
 
 # we are going to parse the input file for each phrase in the dictionary
 print "INFO: Processing " + input_path
@@ -59,7 +59,7 @@ print "Done!"
 print "INFO: Finished processing " + input_path
 
 for phrase, count in counter.iteritems():
-    print "RESULT: the phrase \"" + phrase +"\" occured " + str(count) + " times"
+    print "RESULT: the phrase \"" + phrase + "\" occurred " + str(count) + " times"
 
 print "FINISHED: All the phrases are counted"
     

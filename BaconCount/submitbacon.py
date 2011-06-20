@@ -30,7 +30,9 @@ from grisu.jcommons.utils import HttpProxyManager
 HttpProxyManager.setHttpProxy("202.27.240.31", 8080, "", "")
 
 # Set the backend to which jobs will be submitted
-backend = "BeSTGRID"
+# Use BeSTGRID-DEV for testing and development
+# Use BeSTGRID for live runs
+backend = "BeSTGRID-DEV"
 
 # Set the group under which this job is submitted
 # these are also called "Virtual Organisation" or a VO
@@ -51,8 +53,8 @@ print "INFO: Service interface to " + backend + " Created."
 print "INFO: Service Interface connected as: " + service_interface.getDN()
 
 # Create some base strings to build jobs with
-base_job_name="-bacon-"
-batch_job_name = str(random.randint(10000,99999))+base_job_name
+base_job_name="bacon"
+batch_job_name = str(random.randint(10000,99999))+"-"+base_job_name
 print "INFO: Base job name is "+base_job_name
 print "INFO: Batch job name is "+batch_job_name
 
