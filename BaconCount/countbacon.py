@@ -47,15 +47,14 @@ for phrase in dictionary:
 # we are going to parse the input file for each phrase in the dictionary
 # This is not efficient, but we want this script to take a some time
 print "INFO: Processing " + input_path
-for phrase in dictionary:
-    print "INFO: Counting occurences of the phrase \"" + phrase + "\""
-    input_FILE = open(input_path)
-    sys.stdout.write("INFO: Processing lines")
-    for line in input_FILE:
-        sys.stdout.write(".")
-        counter[phrase] += line.count(phrase)
-    input_FILE.close()
-    print "Done!"
+input_FILE = open(input_path)
+sys.stdout.write("INFO: Processing lines")
+for line in input_FILE:
+    sys.stdout.write(".")
+    for phrase in dictionary:
+        counter[phrase] += line.lower().count(phrase.lower())
+input_FILE.close()
+print "Done!"
 print "INFO: Finished processing " + input_path
 
 for phrase, count in counter.iteritems():
