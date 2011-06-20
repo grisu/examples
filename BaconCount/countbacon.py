@@ -1,7 +1,9 @@
 '''
 Created on 14/06/2011
 
-@author: hicksa
+A dictionary counter example for the Scripted job submission workshop, eResearch Symposium 2011
+
+@author: Aaron hicks, hicksa@landcarersearch.co.nz
 '''
 
 import sys
@@ -45,7 +47,6 @@ for phrase in dictionary:
     counter[phrase]=0
 
 # we are going to parse the input file for each phrase in the dictionary
-# This is not efficient, but we want this script to take a some time
 print "INFO: Processing " + input_path
 input_FILE = open(input_path)
 sys.stdout.write("INFO: Processing lines")
@@ -60,7 +61,7 @@ print "INFO: Finished processing " + input_path
 for phrase, count in counter.iteritems():
     print "RESULT: the phrase \"" + phrase +"\" occured " + str(count) + " times"
 
-print "FINISHED: All the bacon is counted"
+print "FINISHED: All the phrases are counted"
     
         
 

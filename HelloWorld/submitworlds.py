@@ -1,7 +1,7 @@
 '''
 Created on 14/06/2011
 
-A HelloWorld example for the Scripted job submission workshop, eResearch Symposium 2011
+A HelloWorld submission script example for the Scripted job submission workshop, eResearch Symposium 2011
 
 @author: Aaron hicks, hicksa@landcarersearch.co.nz
 '''
