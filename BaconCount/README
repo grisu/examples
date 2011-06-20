@@ -7,7 +7,7 @@ http://baconipsum.com
 Bacon Ipsum was set for 5 paragraphs of Meat and Filler, with "Start with ‘Bacon ipsum dolor sit amet…’" turned on.
 
 There are two scripts:
-countbacon.py	- this script takes two file names as arguments and counts all occurrences of the words in the
+countbacon.py	- this script reads two file counts all occurrences of the words in the
 				first file (the dictionary) in the second file (the input). Output is sent to stdout. 
 submitbacon.py	- this script uses Grisu-jython to create a batch job for each file in the input directory
 				and submit them to a compute resource on BeSTGRID to be counted with countbacon.py. The output
