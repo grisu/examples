@@ -41,6 +41,7 @@ current_dir = os.path.abspath(os.path.curdir)
 print "INFO: Creating service inteface to " + backend
 service_interface = LoginManager.loginCommandline(backend)
 print "INFO: Service interface to " + backend + " Created."
+print "INFO: Service Interface connected as: " + service_interface.getDN()
 
 # Setting the number of jobs to be submitted
 job_count=5
