@@ -28,7 +28,7 @@ from grisu.frontend.model.job import JobObject, JobsException, BackendException
 # Set the backend to which jobs will be submitted
 # Use BeSTGRID-DEV for testing and development
 # Use BeSTGRID for live runs
-backend = "BeSTGRID-DEV"
+backend = "BeSTGRID"
 
 # Set the group under which this job is submitted
 # these are also called "Virtual Organisation" or a VO
@@ -121,6 +121,10 @@ for job in jobs:
         stdout_file = open(os.path.join(current_dir, output_dir, job.getJobname() + "-stdout.txt"), 'w')
         stdout_file.write(job.getStdOutContent())
         stdout_file.close()
+        print "INFO: Downloading error for " + job.getJobname()
+        stderr_file = open(os.path.join(current_dir, output_dir, job.getJobname() + "-stderr.txt"), 'w')
+        stderr_file.write(job.getStdErrContent())
+        stderr_file.close()
     else:
         print "INFO: " + job.getJobname() + " was not successful, skipping download"
 
