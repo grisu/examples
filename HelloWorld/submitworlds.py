@@ -117,11 +117,11 @@ except:
 print "INFO: Downloading output to " + output_dir
 for job in jobs:
     if job.isSuccessful(True):
-        print "INFO: Downloading output for " + job.getJobname()
+        print "INFO: Downloading stdout for " + job.getJobname()
         stdout_file = open(os.path.join(current_dir, output_dir, job.getJobname() + "-stdout.txt"), 'w')
         stdout_file.write(job.getStdOutContent())
         stdout_file.close()
-        print "INFO: Downloading error for " + job.getJobname()
+        print "INFO: Downloading stderr for " + job.getJobname()
         stderr_file = open(os.path.join(current_dir, output_dir, job.getJobname() + "-stderr.txt"), 'w')
         stderr_file.write(job.getStdErrContent())
         stderr_file.close()
