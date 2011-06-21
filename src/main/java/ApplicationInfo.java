@@ -21,7 +21,7 @@ public class ApplicationInfo {
 		// login
 		// in this case we login via the commandline
 		final ServiceInterface si = LoginManager
-		.loginCommandline("BeSTGRID-DEV");
+.loginCommandline("BeSTGRID");
 
 		// create a registry. the registry is used to get objects that can
 		// provide all kinds of grid and user information as well
