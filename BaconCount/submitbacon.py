@@ -85,9 +85,10 @@ print "INFO: Batch job name is "+batch_job_name
 
 # Set some job settings
 application = "python"
+version = "2.4"
 
 print "INFO: Creating a Batch Job Object called "+batch_job_name
-batch_jobs = BatchJobObject(service_interface, batch_job_name, group, application, Constants.NO_VERSION_INDICATOR_STRING)
+batch_jobs = BatchJobObject(service_interface, batch_job_name, group, application, version)
 batch_jobs.setConcurrentInputFileUploadThreads(5)    # Set the number of concurrent uploads
 batch_jobs.setConcurrentJobCreationThreads(5)        # Set the number of concurrent jobs
 batch_jobs.setDefaultNoCpus(1);                      # Set the number of CPUs required
@@ -96,10 +97,66 @@ batch_jobs.setLocationsToExclude(["AUT"])            # Create a blacklist of sit
 # Currently the AUT location is not behaving, so always exclude it
 
 print "INFO: Adding common files to Batch Job Object "+batch_job_name
-#batch_jobs.addInputFile()
-#batch_jobs.addInputFile()
+batch_jobs.addInputFile(os.path.join(current_dir,dictionary_path))
+batch_jobs.addInputFile(os.path.join(current_dir,"countbacon.py"))
+
+print "INFO: Defining jobs from input directory"
+job_count = 0
+for file_name in os.listdir(input_path):
+    print "INFO: Defining job for "+file_name
+    job_name = base_job_name + "-" + file_name
+    job = JobObject(service_interface)
+    job.setJobname(job_name)
+    job.setApplication("python")                                    # Set the application being run
+    job.setApplicationVersion("2.4")                                # Set the application version, note this is an exact match
+    job.addInputFileUrl(os.path.join(current_dir,input_path,file_name))
+    job.setCommandline("python ../countbacon.py ../" + dictionary_path + " " + file_name)
+    print "INFO: " + job.getJobname() + " defined"
+    batch_jobs.addJob(job)
+    print "INFO: " + job.getJobname() + " added to batch " + batch_jobs.getJobname()
+    job_count += 1
+print "INFO: " + str(job_count) + " jobs defined"
+
+print "INFO: Sending batch " + batch_jobs.getJobname() + " to "+backend+" and staging files..."
+try:
+    batch_jobs.prepareAndCreateJobs(False)
+except (JobsException), error:
+    print("HALT: Exception submitting jobs from BatchJobObject " + batch_jobs.getJobname() + "!")
+    for job in error.getFailures().keySet():
+        print "Job: "+job.getJobname()+", Error: "+error.getFailures().get(job).getLocalizedMessage()
+    sys.exit(1)
+except (BackendException), error:
+    print("HALT: Exception from grisu backend " + backend + "!")
+    print(error.getLocalizedMessage())
+    print("========================")
+    time.sleep(3)
+    error.printStackTrace()
+    sys.exit(1)
+time.sleep(3)
+
+print "INFO: Submitting jobs in batch " + batch_jobs.getJobname()
+batch_jobs.submit()
+
+restarted = False
+
+print "INFO: Waiting for batch " + batch_jobs.getJobname() + " to finish"
+while not batch_jobs.isFinished(True):
+    print "\rWAITING: Running " + str(job_count) + " jobs:",
+    print " Waiting [" + str(batch_jobs.getNumberOfWaitingJobs()) +"]",
+    print " Active [" + str(batch_jobs.getNumberOfRunningJobs()) +"]",
+    print " Successful [" + str(batch_jobs.getNumberOfSuccessfulJobs()) + "]",
+    print " Failed [" + str(batch_jobs.getNumberOfFailedJobs()) + "]", 
+    time.sleep(3)
+
+# Refresh status one last time    
+print "\rWAITING: Running " + str(job_count) + " jobs:",
+print " Waiting [" + str(batch_jobs.getNumberOfWaitingJobs()) +"]",
+print " Active [" + str(batch_jobs.getNumberOfRunningJobs()) +"]",
+print " Successful [" + str(batch_jobs.getNumberOfSuccessfulJobs()) + "]",
+print " Failed [" + str(batch_jobs.getNumberOfFailedJobs()) + "]", 
 
 print("INFO: Kill and clean " + batch_job_name + " jobs")
+del_str = "" # to put in scope
 try:
     service_interface.kill(batch_job_name, True);
     status = service_interface.getActionStatus(batch_job_name)
@@ -111,5 +168,8 @@ try:
         status = service_interface.getActionStatus(batch_job_name)
 except:
     print "INFO: No need to kill and clean job " + batch_job_name
+print "\rDeletion 100%" # shh, faking this.
+print "INFO: batch " + batch_job_name + " deleted"
 
+print "FINISHED: submitbacon completed"
 sys.exit()
