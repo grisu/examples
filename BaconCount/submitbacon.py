@@ -18,16 +18,14 @@ import time
 # sys.path.append('../lib/grisu-jython.jar')
 
 # Documentation on these objects can be found here: http://grisu.github.com/grisu/javadoc/
-from grisu.jcommons.constants import Constants
 from grisu.frontend.control.login import LoginManager
-from grisu.frontend.model.job import JobObject, BatchJobObject, JobsException, BackendException, FileUploadException
+from grisu.frontend.model.job import JobObject, BatchJobObject, JobsException, BackendException
 from grisu.settings import ClientPropertiesManager
 
 # If your netwok has a HTTP proxy you can configure Grisu-Jython to use it here
-from grisu.jcommons.utils import HttpProxyManager
+#from grisu.jcommons.utils import HttpProxyManager
 # The arguments are: address, port, username and password.
 # HttpProxyManager.setHttpProxy("proxy.example.com", 8080, "", "")
-HttpProxyManager.setHttpProxy("202.27.240.31", 8080, "", "")
 
 # Set the backend to which jobs will be submitted
 # Use BeSTGRID-DEV for testing and development
@@ -163,6 +161,13 @@ print "INFO: Writing output to " + output_path
 
 if not os.path.isdir(output_path):
     os.mkdir(output_path)
+
+# This method on the BatchJobObject _should_ download the output files for all the
+# jobs into the output_path directory.
+# BUT it is currently incomplete and does not work
+# See issue at 
+# batch_jobs.downloadResults(True,output_path,['.txt'],True,False)
+
 
 for job in batch_jobs.getJobs():
     if job.isSuccessful(True):

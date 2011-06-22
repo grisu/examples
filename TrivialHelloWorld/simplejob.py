@@ -2,24 +2,22 @@ from grisu.frontend.control.login import LoginManager
 from grisu.frontend.model.job import JobObject
 import sys
 
-si = LoginManager.loginCommandline("BeSTGRID")
+# create a service interface to the BeSTGRID backend
+service_interface = LoginManager.loginCommandline("BeSTGRID")
 
+print 'Creating job object...'
 
+job = JobObject(service_interface);
 
-print 'Creating job...'
-# create the job object
-
-job = JobObject(si);
-# set a unique jobname
-job.setJobname("echo_job1")
+job.setJobname("echo_job1") # job name must be unique
 print 'Set jobname to: '+ job.getJobname()
-# set the name of the application like it is published in mds. "generic" means not to use mds for the lookup.
+# set the name of the application as it is published in MDS.
+# "generic" means not to use MDS for the lookup.
 job.setApplication("generic")
-# since we are using a "generic" job, we need to specify a submission location. I'll make that easier later on...
+# "generic" jobs require a submission location to be specified
 job.setSubmissionLocation("all.q:ng2.scenzgrid.org#SGE")
 
-
-# set the commandline that needs to be executed
+# set the command that needs to be executed
 job.setCommandline("echo \"Hello World\"")
 
 # create the job on the backend and specify the VO to use
@@ -32,18 +30,13 @@ print 'Waiting for the job to finish...'
 # this waits until the job is finished. Checks every 10 seconds (which would be too often for a real job)
 finished = job.waitForJobToFinish(10)
 
-if not finished:
-        print "not finished yet."
-        # kill the job on the backend anyway
-        job.kill(True);
-else:
-        print 'Job finished. Status: '+job.getStatusString(False)
-        # download and cache the jobs' stdout and display it's content
-        print "Stdout: " + job.getStdOutContent()
-        # download and cache the jobs' stderr and display it's content
-        print "Stderr: " + job.getStdErrContent()
-        # kill and clean the job on the backend
-        job.kill(True)
+print 'Job finished. Status: '+job.getStatusString(False)
+# download and cache the jobs' stdout and display it's content
+print "Stdout: " + job.getStdOutContent()
+# download and cache the jobs' stderr and display it's content
+print "Stderr: " + job.getStdErrContent()
+# kill and clean the job on the backend
+job.kill(True)
 
 # don't forget to exit properly. this cleans up possible existing threads/executors
 sys.exit()
