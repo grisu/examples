@@ -9,13 +9,13 @@ print 'Creating job object...'
 
 job = JobObject(service_interface);
 
-job.setJobname("echo_job1") # job name must be unique
+job.setJobname("echo_job-AWH") # job name must be unique
 print 'Set jobname to: '+ job.getJobname()
 # set the name of the application as it is published in MDS.
 # "generic" means not to use MDS for the lookup.
 job.setApplication("generic")
 # "generic" jobs require a submission location to be specified
-job.setSubmissionLocation("all.q:ng2.scenzgrid.org#SGE")
+job.setSubmissionLocation("route@er171.ceres.auckland.ac.nz:ng2.auckland.ac.nz")
 
 # set the command that needs to be executed
 job.setCommandline("echo \"Hello World\"")
