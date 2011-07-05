@@ -1,0 +1,10 @@
+This example submits 5 helloworld jobs to BeSTGRID, and reports back the hostname,
+and if run under Linux the username, otherwise the OS platform.
+ 
+Unlike the TrivialHelloWorld example, this example demonstrates submitting multiple jobs,
+handling jobs in Lists, and give examples of exception handling.
+
+To run the scripts from this directory with:
+
+java -jar ../lib/grisu-jython.jar hostname.py
+java -jar ../lib/grisu-jython.jar submitworld.py 
