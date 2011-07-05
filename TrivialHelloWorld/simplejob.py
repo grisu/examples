@@ -17,6 +17,7 @@ job.setApplication("generic")
 # "generic" jobs require a submission location to be specified
 job.setSubmissionLocation("all.q:ng2.scenzgrid.org#SGE")
 
+
 # set the command that needs to be executed
 job.setCommandline("echo \"Hello World\"")
 
