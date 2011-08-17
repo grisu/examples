@@ -11,6 +11,7 @@ import grisu.model.FileManager;
 import grisu.model.GrisuRegistry;
 import grisu.model.GrisuRegistryManager;
 import grisu.model.dto.GridFile;
+import grisu.settings.ClientPropertiesManager;
 
 public class SimpleEndToEndWorkflow {
 
@@ -20,12 +21,14 @@ public class SimpleEndToEndWorkflow {
 	 */
 	public static void main(String[] args) throws RemoteFileSystemException {
 
+		ClientPropertiesManager.setConcurrentUploadThreads(10);
+
 		System.out.println("Logging in...");
 		ServiceInterface si = null;
 		try {
 			// login
 			// in this case we login via the commandline
-			// si = LoginManager.loginCommandline("BeSTGRID");
+			// si = LoginManager.loginCommandline("BeSTGRID-DEV");
 			si = LoginManager.loginCommandline("LOCAL");
 		} catch (final LoginException e) {
 			System.err.println("Could not login: " + e.getLocalizedMessage());
@@ -56,14 +59,18 @@ public class SimpleEndToEndWorkflow {
 		// we can set a submission location if we want to enforce where the job
 		// should run. This can be omitted and Grisu will automatically choose a
 		// suitable submission location for you
-		job.setSubmissionLocation("route@er171.ceres.auckland.ac.nz:ng2.auckland.ac.nz");
+		// job.setSubmissionLocation("route@er171.ceres.auckland.ac.nz:ng2.auckland.ac.nz");
 
 		// for this job, we upload an input folder into a (differently named)
 		// folder (called "testfolder"). If we don't need a different name/path,
 		// we can use the one-parameter version of this method.
-		job.addInputFileUrl(
-				"/home/markus/grid-src/grisu-virtscreen/src/main/java",
-		"testfolder");
+		// job.addInputFileUrl("/home/markus/src/grisu-virtscreen/src/main/java",
+		// "testfolder");
+		// job.addInputFileUrl(
+		// "grid://jobs/active/MyFirstJob_2011.07.07_17.20.902/testfolder",
+		// "testfolder2");
+
+		job.addInputFileUrl("/home/markus/test/test.txt");
 
 		// for reference, we remember the auto-determined name of the job
 		System.out.println("Set jobname to be: " + job.getJobname());
@@ -83,6 +90,7 @@ public class SimpleEndToEndWorkflow {
 			// for that to work we also need to specify the VO we want to use to
 			// submit the job
 			job.createJob("/ARCS/BeSTGRID");
+			// job.createJob("/nz/nesi");
 		} catch (final JobPropertiesException e) {
 			System.err.println("Could not create job: "
 					+ e.getLocalizedMessage());

@@ -19,7 +19,7 @@ public class Folderdownload {
 
 		// ServiceInterface si = LoginManager.loginCommandline();
 		final ServiceInterface si = LoginManager
-				.loginCommandline(LoginManager.SERVICEALIASES.get("LOCAL"));
+				.loginCommandline(LoginManager.SERVICEALIASES.get("local"));
 
 		final GrisuRegistry registry = GrisuRegistryManager.getDefault(si);
 

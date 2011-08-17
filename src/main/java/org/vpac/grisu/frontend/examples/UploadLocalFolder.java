@@ -18,7 +18,7 @@ public class UploadLocalFolder {
 	public static void main(String[] args) throws Exception {
 
 		final ServiceInterface si = LoginManager
-				.loginCommandline(LoginManager.SERVICEALIASES.get("LOCAL"));
+				.loginCommandline(LoginManager.SERVICEALIASES.get("local"));
 
 		final GrisuRegistry registry = GrisuRegistryManager.getDefault(si);
 

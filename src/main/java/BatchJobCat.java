@@ -20,7 +20,7 @@ public class BatchJobCat {
 	public static void main(final String[] args) throws Exception {
 
 		final ServiceInterface si = LoginManager
-		.loginCommandline("BeSTGRID-DEV");
+				.loginCommandline("BeSTGRID-DEV");
 
 		final GrisuRegistry registry = GrisuRegistryManager.getDefault(si);
 
@@ -71,7 +71,7 @@ public class BatchJobCat {
 		try {
 			batchJob.submit();
 		} catch (final Exception e) {
-			e.printStackTrace();
+
 			System.exit(1);
 		}
 
