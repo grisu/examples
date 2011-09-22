@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<properties>
-		<grisu.dependency.version>0.3.6</grisu.dependency.version>
+		<grisu.dependency.version>0.3.7-SNAPSHOT</grisu.dependency.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -41,7 +41,7 @@
 	
 	<artifactId>client-examples</artifactId>
 	<groupId>grisu.frontend</groupId>
-	<version>0.3.6-SNAPSHOT</version>
+	<version>0.3.7-SNAPSHOT</version>
 	<dependencies>
 		<dependency>
 			<groupId>grisu.frontend</groupId>
