@@ -13,7 +13,6 @@ from grisu.frontend.model.job import JobObject
 import random
 import sys
 import time
-from grisu.model.dto import DtoStringList
 
 # si stands for serviceInterface and holds all session information
 si = LoginManager.loginCommandline('bestgrid-test')
