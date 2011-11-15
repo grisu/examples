@@ -28,15 +28,6 @@ finished_jobs = []
 # better make that unique for each run, so we can resume workflows easier if necessary (this introduces quite a bit more complexity though)
 jobname_base = 'workflow_test'
 
-all_jobnames = si.getAllJobnames(None).getStringList()
-to_clear = []
-for name in all_jobnames:
-    if name.startswith(jobname_base): 
-        to_clear.append(name)
-        
-to_clear_list = DtoStringList.fromStringList(to_clear)
-si.killJobs(to_clear_list, True)
-
 for total in range(1, amount_of_jobs_total+1):
     job = JobObject(si)
     job.setJobname(jobname_base+'_'+str(total))
