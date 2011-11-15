@@ -36,11 +36,11 @@ public class MountPointInfo {
 		// for that we need a UserEnvironmentManager object, which contains
 		// user-specific information
 		// that is related to the grid
-		UserEnvironmentManager uem = registry.getUserEnvironmentManager();
+		final UserEnvironmentManager uem = registry.getUserEnvironmentManager();
 
 		System.out.println("All available mountpoints:\n");
 		// getting all available mountpoints for this particular user
-		for (MountPoint mp : uem.getMountPoints()) {
+		for (final MountPoint mp : uem.getMountPoints()) {
 			System.out.println("\t" + mp.getAlias() + "\t" + mp.getFqan()
 					+ "\t\t" + mp.getRootUrl());
 			System.out.println("\tIs volatile: " + mp.isVolatileFileSystem());
@@ -48,17 +48,16 @@ public class MountPointInfo {
 
 		System.out.println("\n");
 
-		for (MountPoint mp : uem.getMountPoints()) {
+		for (final MountPoint mp : uem.getMountPoints()) {
 			Date start = null;
 			Date end = null;
 			try {
-				System.out
-				.print("Accessing MountPoint \"" + mp.getAlias()
+				System.out.print("Accessing MountPoint \"" + mp.getAlias()
 						+ "\": ");
 
 				start = new Date();
-				//				boolean folder = fm.isFolder(mp.getRootUrl());
-				GridFile f = fm.ls(mp.getRootUrl());
+				// boolean folder = fm.isFolder(mp.getRootUrl());
+				final GridFile f = fm.ls(mp.getRootUrl());
 				end = new Date();
 				System.out.println("success");
 				if (f.isFolder()) {
@@ -70,7 +69,7 @@ public class MountPointInfo {
 							+ (end.getTime() - start.getTime())
 							+ " ms (Result: not a folder!)");
 				}
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				end = new Date();
 				System.out.println("failed\n\t( " + e.getLocalizedMessage()
 						+ " )");

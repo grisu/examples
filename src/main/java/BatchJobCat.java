@@ -1,5 +1,4 @@
 
-
 import grisu.control.ServiceInterface;
 import grisu.frontend.control.login.LoginManager;
 import grisu.frontend.model.events.BatchJobEvent;
@@ -31,7 +30,6 @@ public class BatchJobCat {
 		final BatchJobObject batchJob = new BatchJobObject(si, batchJobname,
 				"/nz/nesi", "UnixCommands",
 				Constants.NO_VERSION_INDICATOR_STRING);
-
 
 		final String pathToInputFiles = batchJob.pathToInputFiles();
 

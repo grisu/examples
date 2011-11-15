@@ -24,7 +24,7 @@ public class AllGridResourcesForAJob {
 		// final ServiceInterface si =
 		// LoginManager.loginCommandline("BeSTGRID");
 		final ServiceInterface si = LoginManager
-		.loginCommandline("BeSTGRID-DEV");
+				.loginCommandline("BeSTGRID-DEV");
 
 		// create a registry. the registry is used to get objects that can
 		// provide all kinds of grid and user information as well
@@ -36,8 +36,8 @@ public class AllGridResourcesForAJob {
 		// those contain all queryable information about a certain
 		// application on the grid, e.g. where it is installed, which
 		// versions...
-		ApplicationInformation info = registry
-		.getApplicationInformation("mothur");
+		final ApplicationInformation info = registry
+				.getApplicationInformation("mothur");
 
 		// now we get all the submissionlocations for this application on the
 		// grid
@@ -47,24 +47,28 @@ public class AllGridResourcesForAJob {
 		// queue:gateway[#SchedulerType] (default SchedulerType is 'PBS')
 		// example would be:
 		// grid_aix:ng2hpc.canterbury.ac.nz#Loadleveler
-		Set<String> allSubLocs = info.getAvailableAllSubmissionLocations();
+		final Set<String> allSubLocs = info
+				.getAvailableAllSubmissionLocations();
 
-		for (String subLoc : allSubLocs) {
-			System.out.println("Submission location for Mothur: "
-					+ subLoc);
+		for (final String subLoc : allSubLocs) {
+			System.out.println("Submission location for Mothur: " + subLoc);
 		}
 
-		// or we can query which VOs a user can use to submit a job for a certain application
-		// for that we need a UserEnvironmentManager object, which contains user-specific information
+		// or we can query which VOs a user can use to submit a job for a
+		// certain application
+		// for that we need a UserEnvironmentManager object, which contains
+		// user-specific information
 		// that is related to the grid
-		UserEnvironmentManager uem = registry.getUserEnvironmentManager();
-		Set<String> allVos = uem.getAllAvailableFqansForApplication("blast");
+		final UserEnvironmentManager uem = registry.getUserEnvironmentManager();
+		final Set<String> allVos = uem
+				.getAllAvailableFqansForApplication("blast");
 
 		System.out.println("Submission locations for 'Mothur' (per VO):");
-		for (String vo : allVos) {
+		for (final String vo : allVos) {
 			System.out.println("VO: " + vo);
-			Set<String> subLocs = info.getAvailableSubmissionLocationsForFqan(vo);
-			for (String subLoc : subLocs) {
+			final Set<String> subLocs = info
+					.getAvailableSubmissionLocationsForFqan(vo);
+			for (final String subLoc : subLocs) {
 				System.out.println("\t" + subLoc);
 			}
 		}

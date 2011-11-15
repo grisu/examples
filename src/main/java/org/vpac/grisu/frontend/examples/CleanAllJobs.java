@@ -10,8 +10,8 @@ import grisu.model.dto.DtoStringList;
 public final class CleanAllJobs {
 
 	public static void main(final String[] args)
-	throws ServiceInterfaceException, LoginException,
-	NoSuchJobException {
+			throws ServiceInterfaceException, LoginException,
+			NoSuchJobException {
 
 		final ServiceInterface si = LoginManager.loginCommandline("Local");
 

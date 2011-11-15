@@ -30,11 +30,11 @@ public class AllApplicationsForUser {
 		final GrisuRegistry registry = GrisuRegistryManager.getDefault(si);
 
 		// getting an userenvironmentmanager
-		UserEnvironmentManager uem = registry.getUserEnvironmentManager();
+		final UserEnvironmentManager uem = registry.getUserEnvironmentManager();
 
-		String[] apps = uem.getAllAvailableApplications();
+		final String[] apps = uem.getAllAvailableApplications();
 
-		for (String app : apps) {
+		for (final String app : apps) {
 
 			System.out.println(app);
 

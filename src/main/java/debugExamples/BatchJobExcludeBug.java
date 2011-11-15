@@ -1,4 +1,5 @@
 package debugExamples;
+
 import grisu.control.ServiceInterface;
 import grisu.frontend.control.login.LoginManager;
 import grisu.frontend.model.job.BatchJobObject;
@@ -12,14 +13,13 @@ public class BatchJobExcludeBug {
 
 	public static void main(final String[] args) throws Exception {
 
-		ServiceInterface si = LoginManager.loginCommandline("BeSTGRID");
+		final ServiceInterface si = LoginManager.loginCommandline("BeSTGRID");
 		// ServiceInterface si = LoginManager.loginCommandline("Local");
 
 		final int numberOfJobs = 5;
 
 		final Date start = new Date();
 		final String multiJobName = "batchExample_" + start.getTime();
-
 
 		final BatchJobObject batchJob = new BatchJobObject(si, multiJobName,
 				"/ARCS/BeSTGRID", "UnixCommands",
@@ -63,7 +63,6 @@ public class BatchJobExcludeBug {
 		System.out.println("Submission finished.");
 
 		batchJob.waitForJobToFinish(10);
-
 
 		if (batchJob.failedJobs().size() > 0) {
 			System.out.println("Some of the jobs failed :-(");

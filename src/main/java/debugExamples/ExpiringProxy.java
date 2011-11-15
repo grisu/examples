@@ -1,4 +1,5 @@
 package debugExamples;
+
 import grisu.X;
 import grisu.control.JobConstants;
 import grisu.control.ServiceInterface;
@@ -22,20 +23,18 @@ public class ExpiringProxy {
 
 		Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
 
-		String username = "markus_test";
-		char[] password = "lisaminelly43deanmartin".toCharArray();
+		final String username = "markus_test";
+		final char[] password = "lisaminelly43deanmartin".toCharArray();
 
 		DirectMyProxyUpload.init(args[0].toCharArray(), "myproxy.arcs.org.au",
-				7512, username,
-				password, null, null, null, null, 360, false);
+				7512, username, password, null, null, null, null, 360, false);
 
 		X.p("Myproxy cred uploaded.");
 
 		ServiceInterface si = null;
 		try {
-			si = LoginManager.myProxyLogin("dev", username,
-					password);
-		} catch (LoginException e) {
+			si = LoginManager.myProxyLogin(username, password, "dev");
+		} catch (final LoginException e) {
 			X.p(e.getLocalizedMessage());
 			System.exit(1);
 		}
@@ -46,7 +45,7 @@ public class ExpiringProxy {
 
 		X.p("Logged in.");
 
-		boolean stop = false;
+		final boolean stop = false;
 		while (!stop) {
 			Set<DtoJob> jobs = null;
 
@@ -54,7 +53,7 @@ public class ExpiringProxy {
 
 			int running = 0;
 			int done = 0;
-			for (DtoJob j : jobs) {
+			for (final DtoJob j : jobs) {
 				if (j.getStatus() < JobConstants.FINISHED_EITHER_WAY) {
 					running = running + 1;
 				} else {
@@ -67,7 +66,6 @@ public class ExpiringProxy {
 			Thread.sleep(2000);
 
 		}
-
 
 	}
 }

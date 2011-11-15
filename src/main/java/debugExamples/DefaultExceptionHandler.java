@@ -2,16 +2,18 @@ package debugExamples;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sun.xml.ws.client.ClientTransportException;
 
 public class DefaultExceptionHandler implements UncaughtExceptionHandler {
 
-	static final Logger myLogger = Logger.getLogger(DefaultExceptionHandler.class.getName());
+	static final Logger myLogger = LoggerFactory
+			.getLogger(DefaultExceptionHandler.class.getName());
 
 	public void uncaughtException(Thread t, Throwable e) {
-		myLogger.error(e);
+		myLogger.error(e.getLocalizedMessage(), e);
 		if (e instanceof ClientTransportException) {
 			if (e.getLocalizedMessage().contains("401")) {
 				System.err

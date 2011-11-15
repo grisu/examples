@@ -15,10 +15,10 @@ public class Client extends GrisuApplicationWindow {
 			public void run() {
 				try {
 
-					GrisuApplicationWindow appWindow = new Client();
+					final GrisuApplicationWindow appWindow = new Client();
 					appWindow.setVisible(true);
 
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					e.printStackTrace();
 				}
 			}

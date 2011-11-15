@@ -1,4 +1,5 @@
 package tmp;
+
 import grisu.control.ServiceInterface;
 import grisu.frontend.control.login.LoginManager;
 import grisu.frontend.model.job.JobObject;
@@ -15,14 +16,13 @@ public class SimpleJobSubmission {
 
 		// login
 		// in this case we login via the commandline
-		final ServiceInterface si = LoginManager
-		.loginCommandline("Local");
+		final ServiceInterface si = LoginManager.loginCommandline("Local");
 
 		// here we create a new, empty job
 		final JobObject job = new JobObject(si);
 		// if we know it, we should set the name of the Application so Grisu
 		// does not have to calculate it for us
-		job.setApplication("generic");
+		job.setApplication("UnixCommands");
 		// every job has to have a unique jobname, JobObject (more exactly, it's
 		// parent class) provide a few convenience methods to ensure that, like
 		// the one below
@@ -35,8 +35,6 @@ public class SimpleJobSubmission {
 		// do it's task (default is 600 which is too short for a normal job)
 		job.setWalltimeInSeconds(60);
 
-		job.setSubmissionLocation("batch:ng2.symphony.waikato.ac.nz");
-
 		// we can also add input files or folders (not needed for this job)
 		// job.addInputFileUrl("/home/markus/tmp");
 		// now we tell the Grisu backend that we want to create the job
@@ -45,7 +43,7 @@ public class SimpleJobSubmission {
 		// filesystems that are usable for the job and so on).
 		// for that to work we also need to specify the VO we want to use to
 		// submit the job
-		job.createJob("/ARCS/BeSTGRID");
+		job.createJob("/nz/nesi");
 		// The last step is to actually tell the backend to submit the job
 		// to the grid
 		// this step also handles all the filestaging that is involved

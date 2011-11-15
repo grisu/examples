@@ -2,7 +2,6 @@ package org.vpac.grisu.frontend.examples;
 
 import grisu.control.JobConstants;
 import grisu.control.ServiceInterface;
-import grisu.frontend.control.login.LoginParams;
 import grisu.frontend.control.login.ServiceInterfaceFactory;
 import grisu.frontend.model.events.JobStatusEvent;
 import grisu.frontend.model.job.BatchJobObject;
@@ -14,6 +13,7 @@ import grisu.jcommons.utils.SubmissionLocationHelpers;
 import grisu.model.GrisuRegistry;
 import grisu.model.GrisuRegistryManager;
 import grisu.model.info.ApplicationInformation;
+import grith.jgrith.control.LoginParams;
 
 import java.util.Date;
 import java.util.HashMap;

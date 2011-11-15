@@ -16,14 +16,14 @@ public class Client {
 		ServiceInterface si = null;
 		try {
 			si = LoginManager.loginCommandline("BeSTGRID");
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			System.err.println("Could not login: " + e.getLocalizedMessage());
 			System.exit(1);
 		}
 
 		System.out.println("Creating job...");
-		String filename = FileManager.getFilename(args[0]);
-		JobObject job = new JobObject(si);
+		final String filename = FileManager.getFilename(args[0]);
+		final JobObject job = new JobObject(si);
 		job.setApplication("UnixCommands");
 		job.setCommandline("cat " + filename);
 		job.addInputFileUrl(args[0]);
@@ -36,7 +36,7 @@ public class Client {
 		try {
 			System.out.println("Creating job on backend...");
 			job.createJob("/ARCS/BeSTGRID");
-		} catch (JobPropertiesException e) {
+		} catch (final JobPropertiesException e) {
 			System.err.println("Could not create job: "
 					+ e.getLocalizedMessage());
 			System.exit(1);
@@ -45,11 +45,11 @@ public class Client {
 		try {
 			System.out.println("Submitting job to the grid...");
 			job.submitJob();
-		} catch (JobSubmissionException e) {
+		} catch (final JobSubmissionException e) {
 			System.err.println("Could not submit job: "
 					+ e.getLocalizedMessage());
 			System.exit(1);
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			System.err.println("Jobsubmission interrupted: "
 					+ e.getLocalizedMessage());
 			System.exit(1);

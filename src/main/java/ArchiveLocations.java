@@ -33,8 +33,7 @@ public class ArchiveLocations {
 
 		// login
 		// in this case we login via the commandline
-		final ServiceInterface si = LoginManager
-		.loginCommandline("BeSTGRID");
+		final ServiceInterface si = LoginManager.loginCommandline("BeSTGRID");
 
 		// add a new job archive location
 		si.addArchiveLocation("test", "url of location");

@@ -1,5 +1,4 @@
 
-
 import grisu.control.ServiceInterface;
 import grisu.frontend.control.login.LoginManager;
 import grisu.frontend.model.events.BatchJobEvent;
@@ -23,15 +22,14 @@ public class BatchJobSubmit {
 
 		final ExecutorService executor = Executors.newFixedThreadPool(10);
 
-		final ServiceInterface si = LoginManager
-		.loginCommandline("Local");
+		final ServiceInterface si = LoginManager.loginCommandline("Local");
 
 		final GrisuRegistry registry = GrisuRegistryManager.getDefault(si);
 
 		final int numberOfJobs = 10;
 
-		String batchJobname = registry.getUserEnvironmentManager()
-		.calculateUniqueJobname("r-batch_new3");
+		final String batchJobname = registry.getUserEnvironmentManager()
+				.calculateUniqueJobname("r-batch_new3");
 
 		System.out.println("Jobname is: " + batchJobname);
 
@@ -63,7 +61,6 @@ public class BatchJobSubmit {
 			// jo.setSubmissionLocation("route@er171.ceres.auckland.ac.nz:ng2.auckland.ac.nz");
 
 			multiPartJob.addJob(jo);
-
 
 		}
 

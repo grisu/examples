@@ -40,18 +40,18 @@ public class AllSubmissionLocationsForAnApplication {
 		// those contain all queryable information about a certain
 		// application on the grid, e.g. where it is installed, which
 		// versions...
-		ApplicationInformation info = registry
+		final ApplicationInformation info = registry
 				.getApplicationInformation("gold");
 
-
-		Set<GridResource> grs = info.getAllSubmissionLocationsAsGridResources(
-				new HashMap<JobSubmissionProperty, String>(),
-				"/ARCS/BeSTGRID/Drug_discovery/Local");
+		final Set<GridResource> grs = info
+				.getAllSubmissionLocationsAsGridResources(
+						new HashMap<JobSubmissionProperty, String>(),
+						"/ARCS/BeSTGRID/Drug_discovery/Local");
 
 		// Set<GridResource> grs = info.getBestSubmissionLocations(
 		// new HashMap<JobSubmissionProperty, String>(), "/ARCS/BeSTGRID");
 
-		for (GridResource gr : grs) {
+		for (final GridResource gr : grs) {
 
 			System.out.println(SubmissionLocationHelpers
 					.createSubmissionLocationString(gr));

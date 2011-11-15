@@ -1,6 +1,5 @@
 package devHelpers;
 
-
 import grisu.control.ServiceInterface;
 import grisu.frontend.control.login.LoginManager;
 import grisu.frontend.model.events.BatchJobEvent;
@@ -30,7 +29,7 @@ public class BatchJobSubmit {
 
 		final int numberOfJobs = 200;
 
-		String batchJobname = registry.getUserEnvironmentManager()
+		final String batchJobname = registry.getUserEnvironmentManager()
 				.calculateUniqueJobname("deleteJobTest3");
 
 		System.out.println("Jobname is: " + batchJobname);
@@ -65,7 +64,6 @@ public class BatchJobSubmit {
 			jo.setSubmissionLocation("route@er171.ceres.auckland.ac.nz:ng2.auckland.ac.nz");
 
 			multiPartJob.addJob(jo);
-
 
 		}
 

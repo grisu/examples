@@ -1,4 +1,3 @@
-
 import grisu.control.ServiceInterface;
 import grisu.frontend.control.login.LoginManager;
 import grisu.frontend.model.job.JobObject;
@@ -15,8 +14,7 @@ public class SimpleJobSubmission {
 
 		// login
 		// in this case we login via the commandline
-		final ServiceInterface si = LoginManager
-		.loginCommandline("BeSTGRID");
+		final ServiceInterface si = LoginManager.loginCommandline("BeSTGRID");
 
 		// here we create a new, empty job
 		final JobObject job = new JobObject(si);
@@ -38,8 +36,6 @@ public class SimpleJobSubmission {
 		// do it's task (default is 600 which is too short for a normal job)
 		job.setWalltimeInSeconds(60);
 
-		// we can also add input files or folders (not needed for this job)
-		job.addInputFileUrl("/home/markus/tmp");
 		// now we tell the Grisu backend that we want to create the job
 		// this step is necessary so it can determine missing properties
 		// (like maybe submission location, whether there are any

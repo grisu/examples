@@ -157,7 +157,7 @@ public class ExampleJobCreationPanel extends JPanel implements JobCreationPanel 
 					lockUI(true);
 
 					// now, let's create the job
-					JobObject job = new JobObject(si);
+					final JobObject job = new JobObject(si);
 					// ... and connect it to the submission log panel so the
 					// user can see that there's something going on...
 					getSubmissionLogPanel().setJobObject(job);
@@ -194,20 +194,21 @@ public class ExampleJobCreationPanel extends JPanel implements JobCreationPanel 
 					// or, what is recommended if you use the provided swing
 					// client library (as we do here):
 					RunningJobManager.getDefault(si).createJob(job,
-					"/ARCS/BeSTGRID");
+							"/ARCS/BeSTGRID");
 					// this integrates better with the job management panel we
 					// are using
 
 					// last not least, we stage in files and submit the job
 					job.submitJob();
 
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					// if something goes wrong, we want to show the user
-					ErrorInfo info = new ErrorInfo("Job submission error",
-							"Can't submit job:\n\n" + e.getLocalizedMessage(),
-							null, "Error", e, Level.SEVERE, null);
+					final ErrorInfo info = new ErrorInfo(
+							"Job submission error", "Can't submit job:\n\n"
+									+ e.getLocalizedMessage(), null, "Error",
+							e, Level.SEVERE, null);
 
-					JXErrorPane pane = new JXErrorPane();
+					final JXErrorPane pane = new JXErrorPane();
 					pane.setErrorInfo(info);
 					// the following line could be used to show a button to
 					// submit

@@ -16,7 +16,6 @@ import java.util.Set;
  */
 public class AvailableExecutables {
 
-
 	public static void main(String[] args) throws Exception {
 
 		// login
@@ -37,9 +36,9 @@ public class AvailableExecutables {
 
 		final UserEnvironmentManager uem = registry.getUserEnvironmentManager();
 
-		Map<String, Set<String>> exes = uem.getAllAvailableExecutables();
-		for (String app : exes.keySet()) {
-			for (String exe : exes.get(app)) {
+		final Map<String, Set<String>> exes = uem.getAllAvailableExecutables();
+		for (final String app : exes.keySet()) {
+			for (final String exe : exes.get(app)) {
 				System.out.println(exe);
 			}
 		}

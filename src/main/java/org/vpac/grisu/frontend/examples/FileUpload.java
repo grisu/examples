@@ -1,8 +1,8 @@
 package org.vpac.grisu.frontend.examples;
 
 import grisu.control.ServiceInterface;
-import grisu.frontend.control.login.LoginParams;
 import grisu.frontend.control.login.ServiceInterfaceFactory;
+import grith.jgrith.control.LoginParams;
 
 import java.io.File;
 

@@ -15,23 +15,23 @@ public class GetArchivedJobExample {
 	 * @throws NoSuchJobException
 	 */
 	public static void main(String[] args) throws LoginException,
-	NoSuchJobException {
+			NoSuchJobException {
 
 		// login
 		// in this case we login via the commandline
-		ServiceInterface si = LoginManager.loginCommandline("BeSTGRID");
+		final ServiceInterface si = LoginManager.loginCommandline("BeSTGRID");
 
 		// this method retrieves all archived jobs, regardless of the
 		// application
-		DtoJobs jobs = si.getArchivedJobs(null);
+		final DtoJobs jobs = si.getArchivedJobs(null);
 
-		for (DtoJob job : jobs.getAllJobs()) {
+		for (final DtoJob job : jobs.getAllJobs()) {
 
 			System.out.println("Job: "
 					+ DtoJob.getProperty(job, Constants.JOBNAME_KEY));
 
 			// or, alternatively:
-			JobObject jobObject = new JobObject(si, job);
+			final JobObject jobObject = new JobObject(si, job);
 			System.out.println("Job object: " + jobObject.getJobname());
 			System.out.println("\t" + jobObject.getApplication());
 			System.out.println("\t" + jobObject.getApplicationVersion());

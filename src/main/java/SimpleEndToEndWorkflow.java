@@ -1,4 +1,3 @@
-
 import grisu.control.ServiceInterface;
 import grisu.control.exceptions.JobPropertiesException;
 import grisu.control.exceptions.JobSubmissionException;
@@ -43,7 +42,7 @@ public class SimpleEndToEndWorkflow {
 
 		// getting a filemanager object, which encapsulates file related actions
 		// we'll need that later once the job is finished
-		FileManager fm = registry.getFileManager();
+		final FileManager fm = registry.getFileManager();
 
 		System.out.println("Creating job...");
 		// this creates a new, empty JobObject
@@ -89,7 +88,7 @@ public class SimpleEndToEndWorkflow {
 			// filesystems that are usable for the job and so on).
 			// for that to work we also need to specify the VO we want to use to
 			// submit the job
-			job.createJob("/ARCS/BeSTGRID");
+			job.createJob("/nz/nesi");
 			// job.createJob("/nz/nesi");
 		} catch (final JobPropertiesException e) {
 			System.err.println("Could not create job: "
@@ -132,10 +131,10 @@ public class SimpleEndToEndWorkflow {
 
 		System.out.println("List job directory: ");
 		// now we get a GridFile representing the job directory...
-		GridFile jobDirectory = job.listJobDirectory();
+		final GridFile jobDirectory = job.listJobDirectory();
 		// ...and then we traverse through the children of the jobdirectory and
 		// list it's content
-		for (GridFile file : jobDirectory.getChildren()) {
+		for (final GridFile file : jobDirectory.getChildren()) {
 			System.out.println("Name: " + file.getName() + " / URL: "
 					+ file.getUrl());
 		}
@@ -144,7 +143,6 @@ public class SimpleEndToEndWorkflow {
 		// files, in case we need to do some parsing
 		System.out.println("Stdout: " + job.getStdOutContent());
 		System.out.println("Stderr: " + job.getStdErrContent());
-
 
 		// it's pretty important to shutdown the jvm properly. There might be
 		// some executors running in the background

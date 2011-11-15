@@ -3,7 +3,6 @@ package org.vpac.grisu.frontend.examples;
 import grisu.control.JobConstants;
 import grisu.control.ServiceInterface;
 import grisu.frontend.control.login.LoginManager;
-import grisu.frontend.control.login.LoginParams;
 import grisu.frontend.model.events.JobStatusEvent;
 import grisu.frontend.model.job.JobObject;
 import grisu.jcommons.constants.Constants;
@@ -20,18 +19,9 @@ EventTopicSubscriber<JobStatusEvent> {
 	 */
 	public static void main(final String[] args) throws Exception {
 
-		final LoginParams loginParams = new LoginParams(
-				// "http://localhost:8080/grisu-ws/services/grisu",
-				// "https://ngportaldev.vpac.org/grisu-ws/services/grisu",
-				// "http://localhost:8080/enunciate-backend/soap/GrisuService",
-				// "http://localhost:8080/soap/GrisuService",
-				"LOCAL_WS",
-				// "ARCS_DEV",
-				// "Local",
-				args[0], args[1].toCharArray());
 
-		final ServiceInterface si = LoginManager.login(null, null, null, null,
-				loginParams);
+
+		final ServiceInterface si = LoginManager.login();
 
 		final CreateJobAndSubmitJobAndCheckJobInDifferentStages eventHolder = new CreateJobAndSubmitJobAndCheckJobInDifferentStages();
 

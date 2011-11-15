@@ -1,4 +1,5 @@
 package debugExamples;
+
 import grisu.control.ServiceInterface;
 import grisu.frontend.control.login.LoginManager;
 import grisu.frontend.model.job.JobObject;
@@ -12,7 +13,6 @@ import grisu.frontend.model.job.JobObject;
 public class VirtualFilesAsJobInput {
 
 	public static void main(String[] args) throws Exception {
-
 
 		final ServiceInterface si = LoginManager.loginCommandline("Local");
 

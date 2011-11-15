@@ -11,8 +11,8 @@ import grisu.model.dto.DtoJobs;
 public final class JobList {
 
 	public static void main(final String[] args)
-	throws ServiceInterfaceException, LoginException,
-	NoSuchJobException {
+			throws ServiceInterfaceException, LoginException,
+			NoSuchJobException {
 
 		final ServiceInterface si = LoginManager.loginCommandline("ARCS");
 

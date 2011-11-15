@@ -24,7 +24,7 @@ public class FileListingExample {
 
 		// login
 		// in this case we login via the commandline
-		ServiceInterface si = LoginManager.loginCommandline("BeSTGRID");
+		final ServiceInterface si = LoginManager.loginCommandline("BeSTGRID");
 
 		// create a registry. the registry is used to get objects that can
 		// provide all kinds of grid and user information as well
@@ -33,46 +33,46 @@ public class FileListingExample {
 		final GrisuRegistry registry = GrisuRegistryManager.getDefault(si);
 
 		// getting a filemanager object, which encapsulates file related actions
-		FileManager fm = registry.getFileManager();
+		final FileManager fm = registry.getFileManager();
 
 		// or we can query which VOs a user can use to submit a job for a
 		// certain application
 		// for that we need a UserEnvironmentManager object, which contains
 		// user-specific information
 		// that is related to the grid
-		UserEnvironmentManager uem = registry.getUserEnvironmentManager();
+		final UserEnvironmentManager uem = registry.getUserEnvironmentManager();
 
 		String input = "grid://";
 		while (!"exit".equals(input)) {
 
 			// reading user input
-			BufferedReader br = new BufferedReader(new InputStreamReader(
+			final BufferedReader br = new BufferedReader(new InputStreamReader(
 					System.in));
 
 			try {
 				System.out.println("Enter url to list: ");
-				String lastInput = input;
+				final String lastInput = input;
 				input = br.readLine();
 				if (StringUtils.isBlank(input)) {
 					input = lastInput;
 				} else if ("exit".equals(input)) {
 					System.exit(0);
 				}
-			} catch (IOException ioe) {
+			} catch (final IOException ioe) {
 				System.out.println("IO error trying to read user input!");
 				System.exit(1);
 			}
 
 			try {
 				// we use the filemanager to list the specified url
-				GridFile f = fm.ls(input);
-				for (GridFile c : f.getChildren()) {
+				final GridFile f = fm.ls(input);
+				for (final GridFile c : f.getChildren()) {
 					// we can print some more details of the file
 					System.out.println("Child: " + c.getName() + " ("
 							+ c.getPath() + ")");
 					System.out.println("\turl: " + c.getUrl());
 				}
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				System.out.println(e.getLocalizedMessage());
 			}
 

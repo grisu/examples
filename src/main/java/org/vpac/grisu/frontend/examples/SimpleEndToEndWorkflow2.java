@@ -6,8 +6,8 @@ import grisu.control.exceptions.JobSubmissionException;
 import grisu.frontend.control.login.LoginException;
 import grisu.frontend.control.login.LoginManager;
 import grisu.frontend.model.job.JobObject;
-import grisu.frontend.view.cli.CliHelpers;
 import grisu.jcommons.constants.Constants;
+import grisu.jcommons.utils.CliHelpers;
 import grisu.model.FileManager;
 import grisu.model.GrisuRegistryManager;
 import grisu.model.info.ApplicationInformation;
@@ -62,16 +62,16 @@ public class SimpleEndToEndWorkflow2 {
 		// we don't care about the version here. it's possible to get that kind
 		// of information for a specific version too...
 		final Set<String> allSubmissionLocations = appInfo
-		.getAvailableSubmissionLocationsForFqan("/ARCS/StartUp");
+				.getAvailableSubmissionLocationsForFqan("/ARCS/StartUp");
 		appInfo.getAvailableSubmissionLocationsForVersionAndFqan("1.6.0",
-		"/ARCS/StartUp");
+				"/ARCS/StartUp");
 
 		// now we ask the user (on the commandline) which submission location to
 		// use
 		// we give him the option of not specifing one, in which case we rely on
 		// grisu to figure out the best one
 		final String subLoc = CliHelpers.getUserChoice(allSubmissionLocations,
-		"Auto-select the best one");
+				"Auto-select the best one");
 
 		if (StringUtils.isNotBlank(subLoc)) {
 			job.setSubmissionLocation(subLoc);

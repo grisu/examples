@@ -15,13 +15,11 @@ import java.util.Set;
  */
 public class ApplicationInfo {
 
-
 	public static void main(String[] args) throws Exception {
 
 		// login
 		// in this case we login via the commandline
-		final ServiceInterface si = LoginManager
-.loginCommandline("BeSTGRID");
+		final ServiceInterface si = LoginManager.loginCommandline("BeSTGRID");
 
 		// create a registry. the registry is used to get objects that can
 		// provide all kinds of grid and user information as well
@@ -36,7 +34,7 @@ public class ApplicationInfo {
 		final ResourceInformation ri = registry.getResourceInformation();
 
 		// now we retrieve all applications available on the grid
-		Set<String> apps = ri.getAllApplications();
+		final Set<String> apps = ri.getAllApplications();
 
 		for (final String app : apps) {
 
@@ -48,7 +46,7 @@ public class ApplicationInfo {
 			// application on the grid, e.g. where it is installed, which
 			// versions...
 			final ApplicationInformation info = registry
-			.getApplicationInformation(app);
+					.getApplicationInformation(app);
 
 			// now we get all the submissionlocations for this application on
 			// the grid a submission location is a string that contains the
@@ -77,7 +75,7 @@ public class ApplicationInfo {
 								+ key
 								+ ":\t"
 								+ info.getApplicationDetails(subLoc, version)
-								.get(key));
+										.get(key));
 					}
 
 				}

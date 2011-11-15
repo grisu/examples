@@ -14,7 +14,7 @@ public class SimpleBatchJobSubmit {
 		// login
 		// in this case we login via the commandline
 		// ServiceInterface si = LoginManager.loginCommandline("BeSTGRID");
-		ServiceInterface si = LoginManager.loginCommandline("Local");
+		final ServiceInterface si = LoginManager.loginCommandline("Local");
 
 		// how many jobs do we want?
 		final int numberOfJobs = 5;

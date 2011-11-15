@@ -1,4 +1,5 @@
 package devHelpers;
+
 import grisu.control.ServiceInterface;
 import grisu.frontend.control.login.LoginManager;
 
@@ -18,13 +19,14 @@ public class Starter {
 	public static void main(String[] args) throws Exception {
 
 		final ServiceInterface si = LoginManager
-		.loginCommandline("BeSTGRID-DEV");
+				.loginCommandline("BeSTGRID-DEV");
 
-		WsSessionTestClient c = new WsSessionTestClient(si);
+		final WsSessionTestClient c = new WsSessionTestClient(si);
 
 		String input = null;
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		final BufferedReader br = new BufferedReader(new InputStreamReader(
+				System.in));
 
 		try {
 			System.out.print("Input: ");
@@ -34,15 +36,15 @@ public class Starter {
 			} else if ("exit".equals(input)) {
 				System.exit(0);
 			}
-		} catch (IOException ioe) {
+		} catch (final IOException ioe) {
 			System.out.println("IO error trying to read user input!");
 			System.exit(1);
 		}
 
 		while (!"exit".equals(input)) {
 
-			WsSessionTestClient.METHOD m = WsSessionTestClient
-			.getEnumFromString(WsSessionTestClient.METHOD.class, input);
+			final WsSessionTestClient.METHOD m = WsSessionTestClient
+					.getEnumFromString(WsSessionTestClient.METHOD.class, input);
 			if (m == null) {
 				System.out.println("No method: " + input);
 				continue;
@@ -53,12 +55,12 @@ public class Starter {
 				case ls:
 					c.ls();
 				}
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 
 			try {
-				String lastInput = input;
+				final String lastInput = input;
 				System.out.print("Input: ");
 				input = br.readLine();
 				if (StringUtils.isBlank(input)) {
@@ -66,11 +68,10 @@ public class Starter {
 				} else if ("exit".equals(input)) {
 					System.exit(0);
 				}
-			} catch (IOException ioe) {
+			} catch (final IOException ioe) {
 				System.out.println("IO error trying to read user input!");
 				System.exit(1);
 			}
-
 
 		}
 

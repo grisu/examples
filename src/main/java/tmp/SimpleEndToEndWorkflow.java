@@ -1,4 +1,5 @@
 package tmp;
+
 import grisu.control.ServiceInterface;
 import grisu.control.exceptions.JobPropertiesException;
 import grisu.control.exceptions.JobSubmissionException;
@@ -11,6 +12,7 @@ import grisu.model.FileManager;
 import grisu.model.GrisuRegistry;
 import grisu.model.GrisuRegistryManager;
 import grisu.model.dto.GridFile;
+import grisu.settings.Environment;
 
 public class SimpleEndToEndWorkflow {
 
@@ -19,6 +21,8 @@ public class SimpleEndToEndWorkflow {
 	 * with the results.
 	 */
 	public static void main(String[] args) throws RemoteFileSystemException {
+
+		Environment.transitionGrisuConfigDirs();
 
 		System.out.println("Logging in...");
 		ServiceInterface si = null;
@@ -40,7 +44,7 @@ public class SimpleEndToEndWorkflow {
 
 		// getting a filemanager object, which encapsulates file related actions
 		// we'll need that later once the job is finished
-		FileManager fm = registry.getFileManager();
+		final FileManager fm = registry.getFileManager();
 
 		System.out.println("Creating job...");
 		// this creates a new, empty JobObject
@@ -56,14 +60,12 @@ public class SimpleEndToEndWorkflow {
 		// we can set a submission location if we want to enforce where the job
 		// should run. This can be omitted and Grisu will automatically choose a
 		// suitable submission location for you
-		job.setSubmissionLocation("route@er171.ceres.auckland.ac.nz:ng2.auckland.ac.nz");
+		// job.setSubmissionLocation("route@er171.ceres.auckland.ac.nz:ng2.auckland.ac.nz");
 
 		// for this job, we upload an input folder into a (differently named)
 		// folder (called "testfolder"). If we don't need a different name/path,
 		// we can use the one-parameter version of this method.
-		job.addInputFileUrl(
-				"/home/markus/grid-src/grisu-virtscreen/src/main/java",
-		"testfolder");
+		job.addInputFileUrl("/home/markus/test/test.txt");
 
 		// for reference, we remember the auto-determined name of the job
 		System.out.println("Set jobname to be: " + job.getJobname());
@@ -82,7 +84,7 @@ public class SimpleEndToEndWorkflow {
 			// filesystems that are usable for the job and so on).
 			// for that to work we also need to specify the VO we want to use to
 			// submit the job
-			job.createJob("/ARCS/BeSTGRID");
+			job.createJob("/nz/nesi");
 		} catch (final JobPropertiesException e) {
 			System.err.println("Could not create job: "
 					+ e.getLocalizedMessage());
@@ -124,10 +126,10 @@ public class SimpleEndToEndWorkflow {
 
 		System.out.println("List job directory: ");
 		// now we get a GridFile representing the job directory...
-		GridFile jobDirectory = job.listJobDirectory();
+		final GridFile jobDirectory = job.listJobDirectory();
 		// ...and then we traverse through the children of the jobdirectory and
 		// list it's content
-		for (GridFile file : jobDirectory.getChildren()) {
+		for (final GridFile file : jobDirectory.getChildren()) {
 			System.out.println("Name: " + file.getName() + " / URL: "
 					+ file.getUrl());
 		}
@@ -136,7 +138,6 @@ public class SimpleEndToEndWorkflow {
 		// files, in case we need to do some parsing
 		System.out.println("Stdout: " + job.getStdOutContent());
 		System.out.println("Stderr: " + job.getStdErrContent());
-
 
 		// it's pretty important to shutdown the jvm properly. There might be
 		// some executors running in the background

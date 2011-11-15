@@ -34,7 +34,7 @@ public class UserProperties {
 		// login
 		// in this case we login via the commandline
 		final ServiceInterface si = LoginManager
-		.loginCommandline("BeSTGRID-TEST");
+				.loginCommandline("BeSTGRID-TEST");
 		// .loginCommandline("Local");
 
 		// add a new job archive location
@@ -50,7 +50,8 @@ public class UserProperties {
 				+ StringUtils.join(si.getArchiveLocations().propertiesAsMap()
 						.values(), " - "));
 
-		for (String key : si.getArchiveLocations().propertiesAsMap().keySet()) {
+		for (final String key : si.getArchiveLocations().propertiesAsMap()
+				.keySet()) {
 			System.out.println("Key: " + key);
 			si.addArchiveLocation(key, null);
 		}

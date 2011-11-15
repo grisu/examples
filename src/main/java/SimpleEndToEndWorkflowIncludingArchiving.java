@@ -30,10 +30,10 @@ public class SimpleEndToEndWorkflowIncludingArchiving {
 			System.exit(1);
 		}
 
-		SimpleEndToEndWorkflowIncludingArchiving wf = new SimpleEndToEndWorkflowIncludingArchiving(
+		final SimpleEndToEndWorkflowIncludingArchiving wf = new SimpleEndToEndWorkflowIncludingArchiving(
 				si);
 
-		int noJobs = 10;
+		final int noJobs = 10;
 
 		for (int i = 0; i < noJobs; i++) {
 			wf.submitJob();
@@ -140,10 +140,10 @@ public class SimpleEndToEndWorkflowIncludingArchiving {
 
 		System.out.println("List job directory: ");
 		// now we get a GridFile representing the job directory...
-		GridFile jobDirectory = job.listJobDirectory();
+		final GridFile jobDirectory = job.listJobDirectory();
 		// ...and then we traverse through the children of the jobdirectory and
 		// list it's content
-		for (GridFile file : jobDirectory.getChildren()) {
+		for (final GridFile file : jobDirectory.getChildren()) {
 			System.out.println("Name: " + file.getName() + " / URL: "
 					+ file.getUrl());
 		}
@@ -159,9 +159,9 @@ public class SimpleEndToEndWorkflowIncludingArchiving {
 			// would go to the BeSTGRID datafabric
 			// also, we are waiting until the archiving is finished...
 			System.out.println("Archiving job...");
-			String archiveLocation = job.archive(null, true);
+			final String archiveLocation = job.archive(null, true);
 			System.out.println("Archived job to: " + archiveLocation);
-		} catch (JobPropertiesException e) {
+		} catch (final JobPropertiesException e) {
 			System.err.println("Could not archive job: "
 					+ e.getLocalizedMessage());
 			System.exit(1);

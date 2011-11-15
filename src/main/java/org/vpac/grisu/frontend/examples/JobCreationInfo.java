@@ -5,7 +5,6 @@ import grisu.control.exceptions.NoSuchJobException;
 import grisu.control.exceptions.ServiceInterfaceException;
 import grisu.frontend.control.login.LoginException;
 import grisu.frontend.control.login.LoginManager;
-import grisu.frontend.control.login.LoginParams;
 import grisu.model.GrisuRegistry;
 import grisu.model.GrisuRegistryManager;
 import grisu.model.dto.DtoBatchJob;
@@ -15,22 +14,15 @@ import grisu.model.info.ApplicationInformation;
 public final class JobCreationInfo {
 
 	public static void main(final String[] args)
-	throws ServiceInterfaceException, LoginException,
-	NoSuchJobException {
+			throws ServiceInterfaceException, LoginException,
+			NoSuchJobException {
 
-		final String username = args[0];
-		final char[] password = args[1].toCharArray();
 
-		final LoginParams loginParams = new LoginParams(
-				// "http://localhost:8080/grisu-ws/services/grisu",
-				// "https://ngportaldev.vpac.org/grisu-ws/services/grisu",
-				// "http://localhost:8080/enunciate-backend/soap/GrisuService",
-				"Local", username, password);
 
 		ServiceInterface si = null;
 		// si = LoginManager.login(null, password, username, "VPAC",
 		// loginParams);
-		si = LoginManager.login(null, null, null, null, loginParams);
+		si = LoginManager.login();
 
 		// DtoJobs test = si.ps(true);
 
@@ -61,7 +53,7 @@ public final class JobCreationInfo {
 		}
 
 		final ApplicationInformation appInfo = registry
-		.getApplicationInformation("java");
+				.getApplicationInformation("java");
 		for (final String version : appInfo
 				.getAllAvailableVersionsForFqan("/ARCS/NGAdmin")) {
 			System.out.println(version);

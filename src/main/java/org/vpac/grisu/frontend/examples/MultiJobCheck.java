@@ -1,9 +1,9 @@
 package org.vpac.grisu.frontend.examples;
 
 import grisu.control.ServiceInterface;
-import grisu.frontend.control.login.LoginParams;
 import grisu.frontend.control.login.ServiceInterfaceFactory;
 import grisu.frontend.model.job.BatchJobObject;
+import grith.jgrith.control.LoginParams;
 
 import java.io.File;
 import java.util.Date;

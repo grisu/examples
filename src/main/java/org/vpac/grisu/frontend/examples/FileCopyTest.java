@@ -1,13 +1,13 @@
 package org.vpac.grisu.frontend.examples;
 
 import grisu.control.ServiceInterface;
-import grisu.frontend.control.login.LoginParams;
 import grisu.frontend.control.login.ServiceInterfaceFactory;
 import grisu.model.FileManager;
 import grisu.model.GrisuRegistry;
 import grisu.model.GrisuRegistryManager;
 import grisu.model.dto.DtoActionStatus;
 import grisu.model.dto.DtoStringList;
+import grith.jgrith.control.LoginParams;
 
 public class FileCopyTest {
 
