@@ -14,7 +14,7 @@ public class Create10Jobs {
 
 	public static void main(String[] args) throws Exception {
 
-		final ServiceInterface si = LoginManager.loginCommandline("dev");
+		final ServiceInterface si = LoginManager.loginCommandline("local");
 		// final ServiceInterface si = LoginManager.loginCommandline("local");
 
 		final int max = 20;

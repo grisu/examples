@@ -7,7 +7,7 @@ import grisu.frontend.control.login.LoginException;
 import grisu.frontend.control.login.LoginManager;
 import grisu.frontend.model.job.JobObject;
 import grisu.jcommons.constants.Constants;
-import grisu.jcommons.utils.CliHelpers;
+import grisu.jcommons.view.cli.CliHelpers;
 import grisu.model.FileManager;
 import grisu.model.GrisuRegistryManager;
 import grisu.model.info.ApplicationInformation;

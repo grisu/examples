@@ -28,7 +28,7 @@ public class AllSubmissionLocationsForAnApplication {
 		// LoginManager.loginCommandline("BeSTGRID");
 		// final ServiceInterface si = LoginManager
 		// .loginCommandline("BeSTGRID-DEV");
-		final ServiceInterface si = LoginManager.loginCommandline("BeSTGRID");
+		final ServiceInterface si = LoginManager.loginCommandline("dev");
 
 		// create a registry. the registry is used to get objects that can
 		// provide all kinds of grid and user information as well
@@ -41,12 +41,12 @@ public class AllSubmissionLocationsForAnApplication {
 		// application on the grid, e.g. where it is installed, which
 		// versions...
 		final ApplicationInformation info = registry
-				.getApplicationInformation("gold");
+				.getApplicationInformation("UnixCommands");
 
 		final Set<GridResource> grs = info
 				.getAllSubmissionLocationsAsGridResources(
 						new HashMap<JobSubmissionProperty, String>(),
-						"/ARCS/BeSTGRID/Drug_discovery/Local");
+						"/nz/grid-dev");
 
 		// Set<GridResource> grs = info.getBestSubmissionLocations(
 		// new HashMap<JobSubmissionProperty, String>(), "/ARCS/BeSTGRID");

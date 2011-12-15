@@ -11,7 +11,7 @@ from grisu.jcommons.utils import HttpProxyManager
 
 HttpProxyManager.useSystemHttpProxy()
 
-si = LoginManager.loginCommandline("BeSTGRID-DEV")
+si = LoginManager.loginCommandline("bestgrid")
     
     
 # create the job object

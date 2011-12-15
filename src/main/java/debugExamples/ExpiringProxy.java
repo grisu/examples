@@ -33,7 +33,7 @@ public class ExpiringProxy {
 
 		ServiceInterface si = null;
 		try {
-			si = LoginManager.myProxyLogin(username, password, "dev");
+			si = LoginManager.myProxyLogin(username, password, "dev", false);
 		} catch (final LoginException e) {
 			X.p(e.getLocalizedMessage());
 			System.exit(1);
