@@ -41,6 +41,7 @@ while len(myJobs) > 0:
         if job.isFinished():
             if job.isFailed(False):
                 print 'Job '+job.getJobname()+' failed. Not doing anything...'
+                myJobs.remove(job)
                 continue
                 
             # stage out
