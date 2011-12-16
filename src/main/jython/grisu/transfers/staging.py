@@ -30,7 +30,7 @@ for job in allJobs:
     
 fileUrls = []
     
-while myJobs:
+while len(myJobs) > 0:
     
     for job in myJobs:
         
@@ -46,7 +46,7 @@ while myJobs:
 
             print 'Staging file: '+fileUrl            
             fm.cp(fileUrl, targetDir+'/'+job.getJobname(), True)
-            
+            # assuming there is no fault, we can clean up the job on the cluster here
             job.kill(True)
     
 sys.exit(0)
