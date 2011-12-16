@@ -51,6 +51,7 @@ while len(myJobs) > 0:
             print 'Staging file: '+fileUrl            
             fm.cp(fileUrl, targetDir+'/'+job.getJobname(), True)
             # assuming there is no fault, we can clean up the job on the cluster here
-            #job.kill(True)
+            job.kill(True)
+            myJobs.remove(job)
     
 sys.exit(0)
