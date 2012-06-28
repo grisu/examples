@@ -19,8 +19,7 @@ public class AllApplicationsForUser {
 		// in this case we login via the commandline
 		// final ServiceInterface si =
 		// LoginManager.loginCommandline("BeSTGRID");
-		final ServiceInterface si = LoginManager
-				.loginCommandline("BeSTGRID-DEV");
+		final ServiceInterface si = LoginManager.loginCommandline("local");
 		// final ServiceInterface si = LoginManager.loginCommandline("Local");
 
 		// create a registry. the registry is used to get objects that can
@@ -39,6 +38,8 @@ public class AllApplicationsForUser {
 			System.out.println(app);
 
 		}
+
+		System.exit(0);
 
 	}
 

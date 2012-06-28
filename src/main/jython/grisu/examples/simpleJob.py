@@ -7,7 +7,6 @@ Created on 17/11/2009
 from grisu.frontend.control.login import LoginManager
 from grisu.frontend.model.job import JobObject
 import sys
-from grisu.jcommons.utils import HttpProxyManager
 
 HttpProxyManager.useSystemHttpProxy()
 

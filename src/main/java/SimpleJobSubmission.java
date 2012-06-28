@@ -14,7 +14,7 @@ public class SimpleJobSubmission {
 
 		// login
 		// in this case we login via the commandline
-		final ServiceInterface si = LoginManager.loginCommandline("BeSTGRID");
+		final ServiceInterface si = LoginManager.loginCommandline("Local");
 
 		// here we create a new, empty job
 		final JobObject job = new JobObject(si);

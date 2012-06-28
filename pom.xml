@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<properties>
-		<grisu.dependency.version>0.4-SNAPSHOT</grisu.dependency.version>
+		<grisu.version>0.5-SNAPSHOT</grisu.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -60,25 +60,22 @@
 	
 	<artifactId>client-examples</artifactId>
 	<groupId>grisu.frontend</groupId>
-	<version>0.3.6-SNAPSHOT</version>
+	<version>0.4-SNAPSHOT</version>
 	<dependencies>
 		<dependency>
 			<groupId>grisu.frontend</groupId>
 			<artifactId>grisu-client</artifactId>
-			<version>${grisu.dependency.version}</version>
-			<scope>compile</scope>
+			<version>${grisu.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>grisu.frontend</groupId>
 			<artifactId>grisu-client-swing</artifactId>
-			<version>${grisu.dependency.version}</version>
-			<scope>compile</scope>
+			<version>${grisu.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>grisu.backend</groupId>
 			<artifactId>grisu-core</artifactId>
-			<version>${grisu.dependency.version}</version>
-			<scope>compile</scope>
+			<version>${grisu.version}</version>
 		</dependency>
 
 		<!-- <dependency> -->
@@ -89,6 +86,11 @@
 		<!-- <scope>provided</scope> -->
 		<!-- </dependency> -->
 
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15</artifactId>
+			<version>1.45</version>
+		</dependency>
 	</dependencies>
 
 	<name>Grisu client examples</name>
@@ -103,8 +105,73 @@
 					<target>1.5</target>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<compilerId>groovy-eclipse-compiler</compilerId>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.groovy</groupId>
+						<artifactId>groovy-eclipse-compiler</artifactId>
+						<version>2.5.1-M3</version>
+						<exclusions>
+							<exclusion>
+								<groupId>org.codehaus.groovy</groupId>
+								<artifactId>groovy-eclipse-batch</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+					<dependency>
+						<groupId>org.codehaus.groovy</groupId>
+						<artifactId>groovy-eclipse-batch</artifactId>
+						<version>1.8.0-03</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/main/groovy</source>
+							</sources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>add-test-source</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/test/groovy</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>			
+			
 		</plugins>
 	</build>
 	<modules>
 	</modules>
+	<parent>
+		<groupId>nz.org.nesi</groupId>
+		<artifactId>nesi</artifactId>
+		<version>0.11</version>
+	</parent>
 </project>

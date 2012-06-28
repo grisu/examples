@@ -1,15 +1,9 @@
 import grisu.control.ServiceInterface;
 import grisu.frontend.control.login.LoginException;
 import grisu.frontend.control.login.LoginManager;
-import grisu.jcommons.constants.JobSubmissionProperty;
-import grisu.jcommons.interfaces.GridResource;
-import grisu.jcommons.utils.SubmissionLocationHelpers;
 import grisu.model.GrisuRegistry;
 import grisu.model.GrisuRegistryManager;
 import grisu.model.info.ApplicationInformation;
-
-import java.util.HashMap;
-import java.util.Set;
 
 /**
  * Example on how to get submission locations for an application and also
@@ -43,20 +37,18 @@ public class AllSubmissionLocationsForAnApplication {
 		final ApplicationInformation info = registry
 				.getApplicationInformation("UnixCommands");
 
-		final Set<GridResource> grs = info
-				.getAllSubmissionLocationsAsGridResources(
-						new HashMap<JobSubmissionProperty, String>(),
-						"/nz/grid-dev");
+		// final Set<GridResource> grs = info
+		// .getAllSubmissionLocationsAsGridResources(
+		// new HashMap<JobSubmissionProperty, String>(),
+		// "/nz/grid-dev");
 
-		// Set<GridResource> grs = info.getBestSubmissionLocations(
-		// new HashMap<JobSubmissionProperty, String>(), "/ARCS/BeSTGRID");
 
-		for (final GridResource gr : grs) {
-
-			System.out.println(SubmissionLocationHelpers
-					.createSubmissionLocationString(gr));
-
-		}
+		// for (final GridResource gr : grs) {
+		//
+		// System.out.println(SubmissionLocationHelpers
+		// .createSubmissionLocationString(gr));
+		//
+		// }
 
 	}
 
